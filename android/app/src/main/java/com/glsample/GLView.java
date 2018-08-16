@@ -1,8 +1,10 @@
 package com.glsample;
 
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
+import android.view.View;
 
 public class GLView extends GLSurfaceView {
     private final GLRenderer mRenderer;
@@ -28,5 +30,14 @@ public class GLView extends GLSurfaceView {
 
         // Render the view only when there is a change in the drawing data
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+
+        // NOTE: https://stackoverflow.com/a/3559726
+        getHolder().setFormat(PixelFormat.TRANSLUCENT);
+        setZOrderOnTop(true);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
     }
 }
